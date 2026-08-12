@@ -67,6 +67,16 @@ stop.
 > **On an iPhone instead?** Same steps — install "Expo Go" from the App Store
 > and scan the QR code with the phone's Camera app. This project runs on both.
 
+### Troubleshooting: "Project is incompatible with this version of Expo Go"
+
+The Expo Go app in the Play Store / App Store is frozen at **SDK 54** — Expo
+stopped shipping newer Expo Go builds to the stores. So this project is pinned
+to SDK 54 on purpose. If you ever see that "incompatible / requires a newer
+Expo Go" error, it means something bumped the project to a newer SDK; keep the
+`expo` version in `package.json` on `~54.x`. (When we're ready to use a newer
+SDK, the path is a "development build" instead of Expo Go — a slightly bigger
+setup we can do later.)
+
 ---
 
 ## How to use the app
