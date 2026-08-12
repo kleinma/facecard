@@ -1,8 +1,12 @@
+import { useHeaderHeight } from '@react-navigation/elements';
 import * as ImagePicker from 'expo-image-picker';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   Alert,
   Image,
+  KeyboardAvoidingView,
+  type LayoutChangeEvent,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -30,7 +34,25 @@ export default function PersonEditScreen({
   route,
 }: ScreenProps<'PersonEdit'>) {
   const c = useTheme();
+  const headerHeight = useHeaderHeight();
   const editId = route.params?.id;
+
+  // Auto-scroll the focused field above the keyboard. We remember each field's
+  // vertical position (measured on layout) and scroll to it when it's focused.
+  const scrollRef = useRef<ScrollView>(null);
+  const fieldY = useRef<Record<string, number>>({});
+  const onFieldLayout = (key: string) => (e: LayoutChangeEvent) => {
+    fieldY.current[key] = e.nativeEvent.layout.y;
+  };
+  const scrollToField = (key: string) => {
+    // A short delay lets the keyboard start opening first.
+    setTimeout(() => {
+      const y = fieldY.current[key];
+      if (y != null) {
+        scrollRef.current?.scrollTo({ y: Math.max(y - 16, 0), animated: true });
+      }
+    }, 80);
+  };
 
   const [loaded, setLoaded] = useState(false);
   const [name, setName] = useState('');
@@ -210,11 +232,17 @@ export default function PersonEditScreen({
   if (!loaded) return <View style={{ flex: 1, backgroundColor: c.bg }} />;
 
   return (
-    <ScrollView
-      style={{ backgroundColor: c.bg }}
-      contentContainerStyle={styles.content}
-      keyboardShouldPersistTaps="handled"
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: c.bg }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={headerHeight}
     >
+      <ScrollView
+        ref={scrollRef}
+        style={{ backgroundColor: c.bg }}
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps="handled"
+      >
       <Text style={[styles.label, { color: c.inkSoft }]}>Photos</Text>
       <ScrollView
         horizontal
@@ -270,6 +298,8 @@ export default function PersonEditScreen({
       <TextInput
         value={pronouns}
         onChangeText={setPronouns}
+        onLayout={onFieldLayout('pronouns')}
+        onFocus={() => scrollToField('pronouns')}
         placeholder="Or type a custom set…"
         placeholderTextColor={c.inkSoft}
         autoCapitalize="none"
@@ -280,6 +310,8 @@ export default function PersonEditScreen({
       <TextInput
         value={notes}
         onChangeText={setNotes}
+        onLayout={onFieldLayout('notes')}
+        onFocus={() => scrollToField('notes')}
         placeholder="How you know them, fun facts… e.g. Met at college, wine nights together. Hiking buddy."
         placeholderTextColor={c.inkSoft}
         multiline
@@ -292,10 +324,11 @@ export default function PersonEditScreen({
           <Chip key={g} label={g} selected onRemove={() => setGroups((p) => p.filter((x) => x !== g))} />
         ))}
       </View>
-      <View style={styles.groupAddRow}>
+      <View style={styles.groupAddRow} onLayout={onFieldLayout('groups')}>
         <TextInput
           value={newGroup}
           onChangeText={setNewGroup}
+          onFocus={() => scrollToField('groups')}
           placeholder="Add a group…"
           placeholderTextColor={c.inkSoft}
           onSubmitEditing={() => addGroup(newGroup)}
@@ -322,16 +355,17 @@ export default function PersonEditScreen({
         </>
       )}
 
-      {editId && (
-        <Button
-          label="Delete person"
-          variant="ghost"
-          color={c.bad}
-          onPress={confirmDelete}
-          style={{ marginTop: 36, borderColor: c.bad }}
-        />
-      )}
-    </ScrollView>
+        {editId && (
+          <Button
+            label="Delete person"
+            variant="ghost"
+            color={c.bad}
+            onPress={confirmDelete}
+            style={{ marginTop: 36, borderColor: c.bad }}
+          />
+        )}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -340,7 +374,8 @@ function inputColors(c: ReturnType<typeof useTheme>) {
 }
 
 const styles = StyleSheet.create({
-  content: { padding: 16, paddingBottom: 60 },
+  // Roomy bottom padding so even the lowest field can scroll clear of the keyboard.
+  content: { padding: 16, paddingBottom: 340 },
   label: {
     fontSize: 13,
     fontWeight: '700',
