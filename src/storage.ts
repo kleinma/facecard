@@ -39,6 +39,7 @@ function normalize(p: Partial<Person>): Person {
   return {
     id: p.id ?? newId(),
     name: p.name ?? '',
+    pronouns: p.pronouns ?? '',
     notes: p.notes ?? '',
     groups: Array.isArray(p.groups) ? p.groups : [],
     photos: Array.isArray(p.photos) ? p.photos : [],

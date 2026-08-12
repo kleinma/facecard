@@ -22,7 +22,7 @@ import {
   upsertPerson,
 } from '../storage';
 import { useTheme } from '../theme';
-import type { Person } from '../types';
+import { PRONOUN_PRESETS, type Person } from '../types';
 import { newId } from '../utils';
 
 export default function PersonEditScreen({
@@ -34,6 +34,7 @@ export default function PersonEditScreen({
 
   const [loaded, setLoaded] = useState(false);
   const [name, setName] = useState('');
+  const [pronouns, setPronouns] = useState('');
   const [notes, setNotes] = useState('');
   const [photos, setPhotos] = useState<string[]>([]);
   const [groups, setGroups] = useState<string[]>([]);
@@ -54,6 +55,7 @@ export default function PersonEditScreen({
         const p = people.find((x) => x.id === editId);
         if (p) {
           setName(p.name);
+          setPronouns(p.pronouns);
           setNotes(p.notes);
           setPhotos(p.photos);
           setOriginalPhotos(p.photos);
@@ -87,7 +89,7 @@ export default function PersonEditScreen({
       ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigation, canSave, name, notes, photos, groups]);
+  }, [navigation, canSave, name, pronouns, notes, photos, groups]);
 
   async function addPhoto(source: 'camera' | 'library') {
     try {
@@ -167,6 +169,7 @@ export default function PersonEditScreen({
       const person: Person = {
         id: editId ?? newId(),
         name: name.trim(),
+        pronouns: pronouns.trim(),
         notes: notes.trim(),
         groups,
         photos,
@@ -247,6 +250,30 @@ export default function PersonEditScreen({
         placeholder="e.g. Jess Morgan"
         placeholderTextColor={c.inkSoft}
         style={[styles.input, inputColors(c)]}
+      />
+
+      <Text style={[styles.label, { color: c.inkSoft }]}>Pronouns</Text>
+      <View style={styles.chipWrap}>
+        {PRONOUN_PRESETS.map((preset) => (
+          <Chip
+            key={preset}
+            label={preset}
+            selected={pronouns.trim().toLowerCase() === preset}
+            onPress={() =>
+              setPronouns((cur) =>
+                cur.trim().toLowerCase() === preset ? '' : preset
+              )
+            }
+          />
+        ))}
+      </View>
+      <TextInput
+        value={pronouns}
+        onChangeText={setPronouns}
+        placeholder="Or type a custom set…"
+        placeholderTextColor={c.inkSoft}
+        autoCapitalize="none"
+        style={[styles.input, inputColors(c), { marginTop: 10 }]}
       />
 
       <Text style={[styles.label, { color: c.inkSoft }]}>Notes</Text>

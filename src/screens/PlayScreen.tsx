@@ -176,6 +176,11 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
               <Avatar name={p.name} size={180} rounded={false} />
             )}
             <Text style={[styles.bigName, { color: c.ink }]}>{p.name}</Text>
+            {p.pronouns.trim().length > 0 && (
+              <Text style={[styles.pronouns, { color: c.inkSoft }]}>
+                {p.pronouns}
+              </Text>
+            )}
             {p.groups.length > 0 && (
               <View style={styles.chipWrap}>
                 {p.groups.map((g) => (
@@ -264,6 +269,7 @@ const styles = StyleSheet.create({
   prompt: { fontSize: 17, textAlign: 'center', lineHeight: 24 },
   bigPhoto: { width: 260, height: 260, borderRadius: 24 },
   bigName: { fontSize: 32, fontWeight: '800', textAlign: 'center' },
+  pronouns: { fontSize: 16, fontWeight: '600', textAlign: 'center' },
   notesCard: {
     borderWidth: 1,
     borderRadius: 18,

@@ -90,6 +90,11 @@ export default function PersonDetailScreen({
       )}
 
       <Text style={[styles.name, { color: c.ink }]}>{person.name}</Text>
+      {person.pronouns.trim().length > 0 && (
+        <Text style={[styles.pronouns, { color: c.inkSoft }]}>
+          {person.pronouns}
+        </Text>
+      )}
 
       {person.groups.length > 0 && (
         <View style={styles.chipWrap}>
@@ -124,6 +129,7 @@ const styles = StyleSheet.create({
   hero: { width: 300, height: 300, borderRadius: 20 },
   heroFallback: { alignItems: 'center', marginVertical: 8 },
   name: { fontSize: 28, fontWeight: '800', marginTop: 18 },
+  pronouns: { fontSize: 15, fontWeight: '600', marginTop: 4 },
   chipWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
   notes: { fontSize: 17, lineHeight: 25, marginTop: 16 },
   stats: { fontSize: 13, marginTop: 20 },

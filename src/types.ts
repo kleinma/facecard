@@ -12,6 +12,8 @@ export type PersonStats = {
 export type Person = {
   id: string;
   name: string;
+  /** e.g. "she/her", "they/them", or a custom set. May be empty. */
+  pronouns: string;
   /** Free-form notes: how you know them, fun facts, anything. */
   notes: string;
   /** Free-form tags like "College" or "Minnesota". A person can have several. */
@@ -24,3 +26,13 @@ export type Person = {
 
 /** The three things a card can show. */
 export type Facet = 'face' | 'name' | 'notes';
+
+/** Common quick-pick pronouns. Anything else can be typed in as custom. */
+export const PRONOUN_PRESETS = [
+  'she/her',
+  'he/him',
+  'they/them',
+  'she/they',
+  'he/they',
+  'ze/zir',
+];
