@@ -46,6 +46,8 @@ export default function PeopleListScreen({ navigation }: ScreenProps<'People'>) 
         <Pressable
           onPress={() => navigation.navigate('PersonEdit')}
           hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Add person"
         >
           <Text style={{ color: c.accent, fontSize: 26, fontWeight: '600' }}>
             ＋
@@ -102,6 +104,7 @@ export default function PeopleListScreen({ navigation }: ScreenProps<'People'>) 
         placeholderTextColor={c.inkSoft}
         value={query}
         onChangeText={setQuery}
+        accessibilityLabel="Search people"
         style={[
           styles.search,
           { backgroundColor: c.surface, borderColor: c.line, color: c.ink },
@@ -145,6 +148,9 @@ export default function PeopleListScreen({ navigation }: ScreenProps<'People'>) 
         renderItem={({ item }) => (
           <Pressable
             style={styles.cell}
+            accessibilityRole="button"
+            accessibilityLabel={item.name}
+            accessibilityHint="Opens this person's details"
             onPress={() =>
               navigation.navigate('PersonDetail', { id: item.id })
             }

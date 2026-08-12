@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Facecard — Privacy Policy</title>
+<style>
+  :root {
+    --bg: #FBFAF7; --surface: #FFFFFF; --ink: #23201D; --soft: #5C574E;
+    --line: #E4E0D6; --accent: #2E6F5E; --accent-ink: #1E4B40;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1A1815; --surface: #232019; --ink: #F0EBE1; --soft: #B0A99B;
+      --line: #38332B; --accent: #5FB89E; --accent-ink: #8FD3BE;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .mark {
+    width: 40px; height: 40px; border-radius: 11px; background: var(--accent);
+    color: #fff; display: grid; place-items: center; font-weight: 800;
+    font-family: Georgia, serif; transform: rotate(-5deg);
+  }
+  .mark span { transform: rotate(5deg); }
+  h1 { font-family: Georgia, serif; font-size: 2rem; margin: 0 0 4px; }
+  .updated { color: var(--soft); font-size: .9rem; margin: 0 0 28px; }
+  .lede {
+    background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+    border-radius: 14px; padding: 18px 20px; margin: 0 0 32px;
+    font-size: 1.05rem;
+  }
+  .lede strong { color: var(--accent-ink); }
+  h2 {
+    font-family: Georgia, serif; font-size: 1.25rem; margin: 34px 0 8px;
+    border-top: 1px solid var(--line); padding-top: 26px;
+  }
+  p, li { color: var(--ink); }
+  .soft { color: var(--soft); }
+  a { color: var(--accent-ink); }
+  code {
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px;
+    font-size: .9em;
+  }
+  footer { margin-top: 48px; color: var(--soft); font-size: .85rem; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="badge">
+      <div class="mark"><span>F</span></div>
+      <strong>Facecard</strong>
+    </div>
+
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: August 12, 2026</p>
+
+    <p class="lede">
+      <strong>Facecard keeps everything on your device.</strong> It has no
+      accounts, no servers, and no internet connection. Nothing you put into the
+      app is ever collected, transmitted, sold, or shared.
+    </p>
+
+    <h2>Information Facecard handles</h2>
+    <p>
+      Everything you add — people's names, pronouns, notes, group tags, photos,
+      and your practice scores — is stored <strong>only on your own device</strong>,
+      in the app's private storage. This information never leaves your phone. The
+      developer cannot see it, and no third party receives it.
+    </p>
+    <p>
+      Facecard does <strong>not</strong> collect analytics, advertising
+      identifiers, crash telemetry, contacts, location, or any other personal
+      data.
+    </p>
+
+    <h2>Camera and photo permissions</h2>
+    <p>
+      When you choose to add a picture to a person, Facecard asks for permission
+      to use your <strong>camera</strong> or <strong>photo library</strong>. These
+      permissions are used for one purpose only: to let you pick or take a photo
+      to add to your deck. A copy is saved into the app's private storage on your
+      device. Photos are never uploaded anywhere.
+    </p>
+    <p>
+      You can decline or revoke these permissions any time in your device
+      settings; the rest of the app keeps working.
+    </p>
+
+    <h2>No accounts, no network</h2>
+    <p>
+      Facecard has no sign-up, no login, and no user accounts. The app contains
+      no code that sends your information over the internet.
+    </p>
+
+    <h2>Data sharing</h2>
+    <p>
+      None. Because your data never leaves your device, there is nothing to share
+      with anyone — no advertisers, no analytics providers, no other companies.
+    </p>
+
+    <h2>Data retention and deletion</h2>
+    <p>Your data stays on your device until you choose to remove it:</p>
+    <ul>
+      <li>Delete an individual person in the app to remove that person and their photos.</li>
+      <li><strong>Uninstalling Facecard permanently deletes all of its data</strong> from your device.</li>
+    </ul>
+    <p class="soft">
+      There is no cloud backup, so uninstalling cannot be undone — export any data
+      you want to keep first (when that feature is available).
+    </p>
+
+    <h2>Children's privacy</h2>
+    <p>
+      Facecard does not collect any personal information from anyone, including
+      children. All data stays on the device under the control of whoever uses it.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes in a future version of the app, the updated policy
+      will be published here with a new "Last updated" date.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy? Contact the developer at
+      <code>your-contact-email@example.com</code>.
+      <span class="soft">(Replace this with the email you want to publish before
+      submitting to an app store.)</span>
+    </p>
+
+    <footer>Facecard — a private, on-device flashcard app for remembering people.</footer>
+  </div>
+</body>
+</html>

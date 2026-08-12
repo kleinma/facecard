@@ -132,7 +132,12 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
     >
       {/* Top bar: End (always) + progress counter */}
       <View style={styles.topBar}>
-        <Pressable onPress={() => finish(results)} hitSlop={10}>
+        <Pressable
+          onPress={() => finish(results)}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="End session and see score"
+        >
           <Text style={[styles.end, { color: c.inkSoft }]}>■ End</Text>
         </Pressable>
         <Text style={[styles.counter, { color: c.inkSoft }]}>
@@ -143,6 +148,7 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
       <ScrollView
         contentContainerStyle={styles.cardArea}
         showsVerticalScrollIndicator={false}
+        accessibilityLiveRegion="polite"
       >
         {!revealed ? (
           <>
@@ -150,7 +156,13 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
               {PROMPTS[current.facet]}
             </Text>
             {showFacePrompt && (
-              <Image source={{ uri: p.photos[0] }} style={styles.bigPhoto} />
+              <Image
+                source={{ uri: p.photos[0] }}
+                style={styles.bigPhoto}
+                accessible
+                accessibilityRole="image"
+                accessibilityLabel="Photo of the person to identify"
+              />
             )}
             {showNamePrompt && (
               <Text style={[styles.bigName, { color: c.ink }]}>{p.name}</Text>
@@ -171,7 +183,13 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
         ) : (
           <>
             {p.photos.length > 0 ? (
-              <Image source={{ uri: p.photos[0] }} style={styles.bigPhoto} />
+              <Image
+                source={{ uri: p.photos[0] }}
+                style={styles.bigPhoto}
+                accessible
+                accessibilityRole="image"
+                accessibilityLabel={`Photo of ${p.name}`}
+              />
             ) : (
               <Avatar name={p.name} size={180} rounded={false} />
             )}
@@ -201,6 +219,8 @@ export default function PlayScreen({ navigation, route }: ScreenProps<'Play'>) {
         {!revealed ? (
           <Pressable
             onPress={() => setRevealed(true)}
+            accessibilityRole="button"
+            accessibilityLabel="Reveal the answer"
             style={[styles.reveal, { backgroundColor: c.accent }]}
           >
             <Text style={[styles.revealLabel, { color: c.onAccent }]}>
@@ -236,6 +256,8 @@ function GradeButton({
   return (
     <Pressable
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
       style={({ pressed }) => [
         styles.grade,
         { backgroundColor: color, opacity: pressed ? 0.85 : 1 },

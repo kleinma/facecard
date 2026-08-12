@@ -13,9 +13,13 @@ type Props = {
 /** A small pill for groups and filters. */
 export default function Chip({ label, selected, onPress, onRemove }: Props) {
   const c = useTheme();
+  const interactive = !!(onRemove || onPress);
   return (
     <Pressable
       onPress={onRemove ?? onPress}
+      accessibilityRole={interactive ? 'button' : 'text'}
+      accessibilityLabel={onRemove ? `${label}, remove` : label}
+      accessibilityState={selected ? { selected: true } : undefined}
       style={[
         styles.chip,
         {

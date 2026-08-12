@@ -49,6 +49,8 @@ export default function PersonDetailScreen({
           <Pressable
             onPress={() => navigation.navigate('PersonEdit', { id })}
             hitSlop={10}
+            accessibilityRole="button"
+            accessibilityLabel="Edit person"
           >
             <Text style={{ color: c.accent, fontSize: 17, fontWeight: '700' }}>
               Edit
@@ -79,8 +81,17 @@ export default function PersonDetailScreen({
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 12 }}
         >
-          {person.photos.map((uri) => (
-            <Image key={uri} source={{ uri }} style={styles.hero} />
+          {person.photos.map((uri, i) => (
+            <Image
+              key={uri}
+              source={{ uri }}
+              style={styles.hero}
+              accessible
+              accessibilityRole="image"
+              accessibilityLabel={`Photo of ${person.name}${
+                person.photos.length > 1 ? `, ${i + 1} of ${person.photos.length}` : ''
+              }`}
+            />
           ))}
         </ScrollView>
       ) : (

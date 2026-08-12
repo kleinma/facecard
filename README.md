@@ -7,7 +7,8 @@ the answer, and mark how you did.
 
 **Everything stays on your phone.** No accounts, no servers, no internet — the
 app has no networking code at all. Photos are copied into the app's own private
-storage.
+storage. (Full privacy policy: [`PRIVACY.md`](PRIVACY.md); a hostable web
+version is in [`docs/privacy.html`](docs/privacy.html).)
 
 This is **v1**: a solo/face-to-face app. (Sharing decks with friends is a
 planned future phase.)

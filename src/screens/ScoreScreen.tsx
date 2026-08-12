@@ -56,7 +56,12 @@ export default function ScoreScreen({ navigation, route }: ScreenProps<'Score'>)
                 </Text>
                 <View style={styles.reviewRow}>
                   {review.map((p) => (
-                    <View key={p.id} style={styles.reviewItem}>
+                    <View
+                      key={p.id}
+                      accessible
+                      accessibilityLabel={p.name}
+                      style={styles.reviewItem}
+                    >
                       <Avatar name={p.name} photo={p.photos[0]} size={56} />
                       <Text
                         numberOfLines={1}
@@ -104,7 +109,11 @@ function Tally({
   c: ReturnType<typeof useTheme>;
 }) {
   return (
-    <View style={[styles.tally, { borderColor: color, backgroundColor: c.surface }]}>
+    <View
+      accessible
+      accessibilityLabel={`${n} ${label}`}
+      style={[styles.tally, { borderColor: color, backgroundColor: c.surface }]}
+    >
       <Text style={[styles.tallyN, { color }]}>{n}</Text>
       <Text style={[styles.tallyLabel, { color: c.inkSoft }]}>{label}</Text>
     </View>

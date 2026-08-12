@@ -97,7 +97,14 @@ export default function PersonEditScreen({
     navigation.setOptions({
       title: editId ? 'Edit person' : 'Add person',
       headerRight: () => (
-        <Pressable onPress={save} disabled={!canSave} hitSlop={10}>
+        <Pressable
+          onPress={save}
+          disabled={!canSave}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="Save person"
+          accessibilityState={{ disabled: !canSave }}
+        >
           <Text
             style={{
               color: canSave ? c.accent : c.inkSoft,
@@ -249,13 +256,21 @@ export default function PersonEditScreen({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ gap: 10, paddingVertical: 4 }}
       >
-        {photos.map((uri) => (
-          <Pressable key={uri} onPress={() => removePhoto(uri)}>
+        {photos.map((uri, i) => (
+          <Pressable
+            key={uri}
+            onPress={() => removePhoto(uri)}
+            accessibilityRole="button"
+            accessibilityLabel={`Photo ${i + 1}`}
+            accessibilityHint="Removes this photo"
+          >
             <Image source={{ uri }} style={styles.photo} />
           </Pressable>
         ))}
         <Pressable
           onPress={choosePhotoSource}
+          accessibilityRole="button"
+          accessibilityLabel="Add a photo"
           style={[
             styles.addPhoto,
             { borderColor: c.line, backgroundColor: c.surface2 },
@@ -277,6 +292,7 @@ export default function PersonEditScreen({
         onChangeText={setName}
         placeholder="e.g. Jess Morgan"
         placeholderTextColor={c.inkSoft}
+        accessibilityLabel="Name"
         style={[styles.input, inputColors(c)]}
       />
 
@@ -302,6 +318,7 @@ export default function PersonEditScreen({
         onFocus={() => scrollToField('pronouns')}
         placeholder="Or type a custom set…"
         placeholderTextColor={c.inkSoft}
+        accessibilityLabel="Custom pronouns"
         autoCapitalize="none"
         style={[styles.input, inputColors(c), { marginTop: 10 }]}
       />
@@ -314,6 +331,7 @@ export default function PersonEditScreen({
         onFocus={() => scrollToField('notes')}
         placeholder="How you know them, fun facts… e.g. Met at college, wine nights together. Hiking buddy."
         placeholderTextColor={c.inkSoft}
+        accessibilityLabel="Notes"
         multiline
         style={[styles.input, styles.notes, inputColors(c)]}
       />
@@ -331,6 +349,7 @@ export default function PersonEditScreen({
           onFocus={() => scrollToField('groups')}
           placeholder="Add a group…"
           placeholderTextColor={c.inkSoft}
+          accessibilityLabel="Add a group"
           onSubmitEditing={() => addGroup(newGroup)}
           returnKeyType="done"
           style={[styles.input, inputColors(c), { flex: 1, marginBottom: 0 }]}
