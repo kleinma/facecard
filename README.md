@@ -68,6 +68,10 @@ stop.
 > **On an iPhone instead?** Same steps — install "Expo Go" from the App Store
 > and scan the QR code with the phone's Camera app. This project runs on both.
 
+**Want a real, installed app on Android** (its own icon, no Expo Go, no dev
+server)? See **[`BUILD.md`](BUILD.md)** — it walks through building an
+installable `.apk` with EAS Build, while keeping Expo Go working for iPhone.
+
 ### Troubleshooting: "Project is incompatible with this version of Expo Go"
 
 The Expo Go app in the Play Store / App Store is frozen at **SDK 54** — Expo

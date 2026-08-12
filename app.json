@@ -14,12 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "Facecard uses your photos so you can add pictures of the people in your deck. Photos stay on this device.",
-        "NSCameraUsageDescription": "Facecard uses your camera so you can take a photo of a person to add to your deck. Photos stay on this device."
-      }
+      "bundleIdentifier": "com.kleinma.facecard"
     },
     "android": {
+      "package": "com.kleinma.facecard",
       "adaptiveIcon": {
         "backgroundColor": "#2E6F5E",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -30,6 +28,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Facecard uses your photos so you can add pictures of the people in your deck. Photos stay on this device.",
+          "cameraPermission": "Facecard uses your camera so you can take a photo of a person to add to your deck. Photos stay on this device."
+        }
+      ]
+    ]
   }
 }
