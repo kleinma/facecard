@@ -137,9 +137,15 @@ export default function PersonEditScreen({
       }
       const result =
         source === 'camera'
-          ? await ImagePicker.launchCameraAsync({ quality: 0.7 })
+          ? await ImagePicker.launchCameraAsync({
+              allowsEditing: true,
+              aspect: [1, 1],
+              quality: 0.7,
+            })
           : await ImagePicker.launchImageLibraryAsync({
               mediaTypes: ['images'],
+              allowsEditing: true,
+              aspect: [1, 1],
               quality: 0.7,
             });
       if (result.canceled) return;
